@@ -51,3 +51,15 @@ This project consists of a Python Flask backend and a Node.js (React) frontend.
 - Create, Read, Update, Delete (CRUD) Todos.
 - Data persisted in SQLite (`backend/todo.db`).
 - Modern dark/light mode React UI.
+
+## CI/CD Pipeline
+
+The project includes a GitHub Actions workflow (`.github/workflows/ci.yml`) that runs automatically on push/PR to `main`.
+
+### Current Stages:
+1. **Details**:
+   - Backend: Lints with `flake8` and tests with `pytest`.
+   - Frontend: Lints with `eslint` and tests with `vitest`.
+
+### Deployment:
+The **Docker Build & Push** step has been intentionally removed from the initial pipeline. This step is reserved for manual configuration or future implementation as per project requirements.
