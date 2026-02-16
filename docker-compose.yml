@@ -1,0 +1,26 @@
+services:
+  backend:
+    build: ./backend
+    container_name: todo-backend
+    networks:
+      - todo-network
+    volumes:
+      - ./backend:/app
+    ports:
+      - "5000:5000"
+  frontend:
+    build: ./frontend
+    container_name: todo-frontend
+    networks:
+      - todo-network
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - "5173:5173"
+networks:
+  todo-network:
+    driver: bridge
+volumes:
+  todo-db:
+    driver: local
