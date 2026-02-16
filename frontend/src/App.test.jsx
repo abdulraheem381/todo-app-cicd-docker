@@ -1,7 +1,6 @@
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import { describe, it, expect, vi } from 'vitest'
 import App from './App'
-import axios from 'axios'
 
 // Mock axios
 vi.mock('axios')
@@ -17,6 +16,5 @@ describe('App', () => {
         const inputElement = screen.getByPlaceholderText(/Add a new task/i)
         expect(inputElement).toBeInTheDocument()
     })
-
     // Add more tests as needed
 })

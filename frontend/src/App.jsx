@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion as Motion, AnimatePresence } from 'framer-motion'
 import { FaTrash, FaCheck, FaPlus, FaUndo } from 'react-icons/fa'
 import './index.css'
 
@@ -62,7 +62,7 @@ function App() {
 
   return (
     <div className="app-container">
-      <motion.div
+      <Motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         className="todo-card"
@@ -80,20 +80,20 @@ function App() {
             placeholder="Add a new task..."
             className="todo-input"
           />
-          <motion.button
+          <Motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             type="submit"
             className="add-btn"
           >
             <FaPlus />
-          </motion.button>
+          </Motion.button>
         </form>
 
         <ul className="todo-list">
           <AnimatePresence mode="popLayout">
             {todos.map(todo => (
-              <motion.li
+              <Motion.li
                 key={todo.id}
                 layout
                 initial={{ opacity: 0, x: -20 }}
@@ -111,28 +111,28 @@ function App() {
                   </span>
                   <span className="todo-text">{todo.task}</span>
                 </div>
-                <motion.button
+                <Motion.button
                   whileHover={{ scale: 1.2, color: '#ff4444' }}
                   whileTap={{ scale: 0.9 }}
                   onClick={() => deleteTodo(todo.id)}
                   className="delete-btn"
                 >
                   <FaTrash />
-                </motion.button>
-              </motion.li>
+                </Motion.button>
+              </Motion.li>
             ))}
             {todos.length === 0 && !isLoading && (
-              <motion.div
+              <Motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 className="empty-state"
               >
                 <p>No tasks yet. Add one above! ✨</p>
-              </motion.div>
+              </Motion.div>
             )}
           </AnimatePresence>
         </ul>
-      </motion.div>
+      </Motion.div>
     </div>
   )
 }
