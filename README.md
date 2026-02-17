@@ -1,65 +1,106 @@
-# Simple Python & Node.js Todo App
+# Todo App with Full DevOps Lifecycle
 
-This project consists of a Python Flask backend and a Node.js (React) frontend.
+## Project Overview
 
-## Prerequisites
+This project demonstrates a complete DevOps implementation, transforming a simple Todo application into a fully containerized, tested, and deployed solution on AWS.
 
-- Python 3.x
-- Node.js & npm
+The project evolved through the following stages:
 
-## Structure
+1.  **Simple Todo App**: Started with a basic Python Flask backend and a React frontend.
+2.  **Containerization**: Dockerized the application using Docker and Docker Compose to ensure consistency across environments.
+3.  **CI Pipeline**: Implemented a CI/CD pipeline using **GitHub Actions** that automatically:
+    *   Runs linting (`flake8`, `eslint`) and tests (`pytest`, `vitest`).
+    *   Builds Docker images for both services.
+    *   Pushes the verified images to DockerHub.
+4.  **Infrastructure as Code (IaC)**: Used **Terraform** to provision an AWS EC2 instance.
+5.  **Deployment**: Deployed the application on the provisioned EC2 server, completing the full DevOps loop.
 
-- `/backend`: Python Flask API with SQLite database.
-- `/frontend`: React frontend using Vite.
+## Architecture & Screenshots
+
+Below are screenshots demonstrating various stages of the project (application, pipeline, infrastructure):
+
+![Project Screenshot 1](Images/screenshot-1.png)
+![Project Screenshot 2](Images/screenshot-2.png)
+![Project Screenshot 3](Images/screenshot-3.png)
+![Project Screenshot 4](Images/screenshot-4.png)
+
+## Tech Stack
+
+*   **Frontend**: React (Vite)
+*   **Backend**: Python (Flask)
+*   **Database**: SQLite (embedded)
+*   **Containerization**: Docker, Docker Compose
+*   **CI/CD**: GitHub Actions
+*   **Infrastructure**: Terraform, AWS (EC2)
+
+---
 
 ## Setup & Run
 
-### Backend
+### Method 1: Run with Docker (Recommended)
 
-1. Navigate to `backend/`:
-   ```bash
-   cd backend
-   ```
-2. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-3. Run the server:
-   ```bash
-   python app.py
-   ```
-   The backend runs on `http://localhost:5000`.
+To run the entire application stack using Docker Compose:
 
-### Frontend
+1.  Make sure you have Docker and Docker Compose installed.
+2.  Run the following command in the root directory:
+    ```bash
+    docker-compose up --build
+    ```
+3.  Access the application:
+    *   Frontend: `http://localhost:5173`
+    *   Backend API: `http://localhost:5000`
 
-1. Navigate to `frontend/`:
-   ```bash
-   cd frontend
-   ```
-2. Install dependencies (if not already done):
-   ```bash
-   npm install
-   ```
-3. Run the development server:
-   ```bash
-   npm run dev
-   ```
-   The frontend runs on `http://localhost:5173`.
+### Method 2: Run with Terraform (Infrastructure)
+
+To provision the infrastructure on AWS:
+
+1.  Navigate to the `Terraform` directory:
+    ```bash
+    cd Terraform
+    ```
+2.  Initialize Terraform:
+    ```bash
+    terraform init
+    ```
+3.  Plan and Apply the configuration:
+    ```bash
+    terraform plan
+    terraform apply
+    ```
+
+### Method 3: Run Locally (Development)
+
+#### Backend
+1.  Navigate to `backend/`:
+    ```bash
+    cd backend
+    ```
+2.  Install dependencies:
+    ```bash
+    pip install -r requirements.txt
+    ```
+3.  Run the server:
+    ```bash
+    python app.py
+    ```
+
+#### Frontend
+1.  Navigate to `frontend/`:
+    ```bash
+    cd frontend
+    ```
+2.  Install dependencies:
+    ```bash
+    npm install
+    ```
+3.  Run the development server:
+    ```bash
+    npm run dev
+    ```
 
 ## Features
 
-- Create, Read, Update, Delete (CRUD) Todos.
-- Data persisted in SQLite (`backend/todo.db`).
-- Modern dark/light mode React UI.
-
-## CI/CD Pipeline
-
-The project includes a GitHub Actions workflow (`.github/workflows/ci.yml`) that runs automatically on push/PR to `main`.
-
-### Current Stages:
-1. **Details**:
-   - Backend: Lints with `flake8` and tests with `pytest`.
-   - Frontend: Lints with `eslint` and tests with `vitest`.
-
-### Deployment:
-The **Docker Build & Push** step has been intentionally removed from the initial pipeline. This step is reserved for manual configuration or future implementation as per project requirements.
+*   Create, Read, Update, Delete (CRUD) Todos.
+*   Data persisted in SQLite (`backend/todo.db`).
+*   Modern dark/light mode React UI.
+*   Fully automated CI/CD pipeline.
